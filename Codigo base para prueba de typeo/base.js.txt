@@ -1,0 +1,49 @@
+import {useState} from 'react'
+
+const App = () =>{
+    const [value, setValue] = useState({normal:'default text', texto:'', select:'', check: false})
+
+    const handleChange = ({target}) =>{
+        console.log(e.target.type, e.target.checked)
+        setValue((state) => ({
+            ...state,
+            [target.name]: target.type ==='checkbox' 
+                ? target.checked 
+                : target.value
+        }))
+    }
+
+    console.log(value)
+    return(
+        <div>
+            {value.length < 5 ? <span>longitud minima de 5</span> : null } 
+            <input type='text' name="normal" value={value.normal} onChange={handleChange}  />
+            
+            <textarea name='texto' value={value.texto} onChange={handleChange} ></textarea>
+            
+            <select value={value.select} name="select" onChange={handleChange} >
+                <option value='' >-- Seleccione --</option>
+                <option value='Chancho feliz' >Chancho feliz</option>
+                <option value='Chanchito Feliz' >Chanchito Feliz</option>
+                <option value='Chanchito Triste' >Chanchito Triste</option>
+                <option value='Felipe' >Felipe</option>   
+            </select>
+
+            <input 
+                type='checkbox'
+                name='check'
+                onChange={handleChange}
+                checked={value.check}
+            />
+
+            <div>
+                <label>Chancho</label>
+                <input type='radio' value='feliz' />Feliz
+                <input type='radio' value='triste' />Triste
+                <input type='radio' value='felipe' />Felipe
+            </div>
+
+        </div>
+    )
+}
+export default App
